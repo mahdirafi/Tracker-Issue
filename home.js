@@ -3,6 +3,21 @@ const btnAll = document.getElementById("btnAll");
 const btnOpen = document.getElementById("btnOpen");
 const btnClosed = document.getElementById("btnClosed");
 
+const loadingSpringer = document.getElementById("loadingSpringer")
+const issueCount = document.getElementById("issueCount")
+
+let allIssues = [];
+
+// spinner
+function showLoading(){
+    loadingSpringer.classList.remove("hidden")
+    issuesContainer.innerHTML = "";
+
+}
+function hideLoading(){
+    loadingSpringer.classList.add("hidden")
+    loadingSpringer.classList.add("flex")
+}
 
 
  async function loadIssues() {
