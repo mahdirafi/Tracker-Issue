@@ -1,5 +1,7 @@
 const issuesContainer = document.getElementById("issuesContainer");
-
+const btnAll = document.getElementById("btnAll");
+const btnOpen = document.getElementById("btnOpen");
+const btnClosed = document.getElementById("btnClosed");
 
 
 
@@ -53,4 +55,30 @@ function displayIssues(issues) {
     card.addEventListener("click", () => showModal(issue));
 });
 
+}
+// btn function 
+btnAll.addEventListener("click", () => {
+    displayIssues(allIssues);  
+    setActiveButton(btnAll);
+    console.log(btnAll);
+});
+
+btnOpen.addEventListener("click", () => {
+    const openIssues = allIssues.filter(issue => issue.status === "open");
+    displayIssues(openIssues); 
+    setActiveButton(btnOpen);
+    console.log(btnOpen);
+});
+
+btnClosed.addEventListener("click", () => {
+    const closedIssues = allIssues.filter(issue => issue.status === "closed");
+    displayIssues(closedIssues); 
+    setActiveButton(btnClosed);
+});
+// set active button
+function setActiveButton(activeBtn) {
+    [btnAll, btnOpen, btnClosed].forEach(btn => {
+        btn.className = "btn bg-white text-gray-500";  
+    });
+    activeBtn.className = "btn text-white bg-primary";
 }
