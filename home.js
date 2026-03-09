@@ -82,3 +82,47 @@ function setActiveButton(activeBtn) {
     });
     activeBtn.className = "btn text-white bg-primary";
 }
+// modal function 
+function showModal(issue) {
+    const modal = document.getElementById("issueModal");
+
+   
+    document.getElementById("modalTitle").textContent = issue.title;
+    document.getElementById("modalDescription").textContent = issue.description;
+
+     
+    const statusEl = document.getElementById("modalStatus");
+    if(issue.status === "open"){
+        statusEl.textContent = "Opened";
+        statusEl.className = "text-white bg-green-500 rounded-full shadow-md px-2 py-1";
+    } else {
+        statusEl.textContent = "Closed";
+        statusEl.className = "text-white bg-purple-500 rounded-full shadow-md px-2 py-1";
+    }
+
+   
+    document.getElementById("modalAuthor").textContent = `Opened by ${issue.author}`;
+    document.getElementById("modalDate").textContent = new Date(issue.createdAt).toLocaleDateString();
+
+    
+    document.getElementById("modalAssignee").textContent = issue.assignee || "Not Assigned";
+
+   
+    const priorityEl = document.getElementById("modalPriority");
+    priorityEl.textContent = issue.priority;
+    priorityEl.className = `text-white ${issue.priority === "HIGH" ? "bg-red-500" : "bg-yellow-500"} rounded-full shadow-md px-2 py-1`;
+
+    
+    const labelsEl = document.getElementById("modalLabels");
+    labelsEl.innerHTML = "";
+    issue.labels?.forEach(label => {
+        const div = document.createElement("div");
+        div.className = "btn bg-gray-100 shadow-md";
+        div.textContent = label;
+        labelsEl.appendChild(div);
+    });
+
+    modal.showModal();
+}
+
+loadIssues();
