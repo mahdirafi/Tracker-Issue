@@ -6,6 +6,8 @@ const btnClosed = document.getElementById("btnClosed");
 const loadingSpringer = document.getElementById("loadingSpringer")
 const issueCount = document.getElementById("issueCount")
 
+const inputSearch = document.getElementById("inputSearch");
+
 let allIssues = [];
 
 // spinner
@@ -19,6 +21,22 @@ function hideLoading(){
     loadingSpringer.classList.add("flex")
 }
 
+// search button 
+function searchIssues() {
+    const query = inputSearch.value.toLowerCase();
+ 
+    const filtered = allIssues.filter(issue => 
+        issue.title.toLowerCase().includes(query) ||
+        issue.description.toLowerCase().includes(query) ||
+        issue.author.toLowerCase().includes(query)
+    );
+
+    displayIssues(filtered);
+};
+ 
+inputSearch.addEventListener("keyup", () => {
+    searchIssues();
+});
 
  async function loadIssues() {
     showLoading();
